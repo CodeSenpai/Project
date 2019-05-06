@@ -1,6 +1,6 @@
-<?php 
+<?php
 require '../config.php';
-$produk = mysqli_query($db,"SELECT * FROM produk");
+$produk = mysqli_query($db, "SELECT * FROM produk");
 $i = 1;
 ?>
 
@@ -81,22 +81,22 @@ $i = 1;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while($row = mysqli_fetch_assoc($produk)): ?>
+                    <?php while ($row = mysqli_fetch_assoc($produk)): ?>
                     <tr>
-                        <td><?=$i; ?></td>
-                        <td><?=$row["nproduk"]; ?></td>
-                        <td><?=$row["deskripsi"]; ?></td>
+                        <td><?=$i;?></td>
+                        <td><?=$row["nproduk"];?></td>
+                        <td><?=$row["deskripsi"];?></td>
                         <td><img src="../bootstrap/images/<?=$row["gambar"]?>" width="100" height="100"> </td>
-                        <td><?=$row["harga"]; ?></td>
+                        <td><?=$row["harga"];?></td>
                         <td align="center">
-                            <a href="edit.php?id=<?=$row["id_produk"]; ?>" onclick"=return confirm('yakin')
+                            <a href="edit.php?id=<?=$row["id_produk"];?>" onclick"=return confirm('yakin')
                                 class="btn btn-info"><i class="fa fa-edit"></i>Edit</a>
-                            <a href="hapus.php?id=<?=$row["id_produk"]; ?>" class="btn btn-danger"><i
+                            <a href="hapus.php?id_produk=<?=$row["id_produk"];?>" class="btn btn-danger"><i
                                     class="fa fa-trash-o"></i>Delete</a>
                         </td>
                     </tr>
-                    <?php $i++; ?>
-                    <?php endwhile; ?>
+                    <?php $i++;?>
+                    <?php endwhile;?>
                 </tbody>
             </table>
         </div>

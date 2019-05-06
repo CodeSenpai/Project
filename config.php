@@ -87,6 +87,18 @@ return $namafilebaru;
 }
 ?>
 
+<?php
+function hapusprod($data){
+    global $db;
+    mysqli_query($db,"DELETE FROM PRODUK WHERE id_produk = '$data'");
+    return mysqli_affected_rows($db);
+}
+
+
+
+
+?>
+
 
 <?php
 //function ubah data produk

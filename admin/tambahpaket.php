@@ -76,23 +76,26 @@ if(isset($_POST["tambah"])){
                         <label class="control-label ml-3" for="nproduk">Nama Paket</label>
                         <input type="text" name="nproduk" class="form-control ml-3 col-10" id="nama" required="text">
                     </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label" for="deskripsi">Deskripsi</label>
-                        <input type="text" name="deskripsi" class="form-control col-10" id="deskripsi" required="text">
+                        <textarea class="form-control col-8" id="deskripsi" name="deskripsi" rows="3"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label" for="gambar">Gambar</label>
-                        <input type="file" name="gambar" class="form-control col-10" id="gambar" required="file">
+                        <input type="file" name="gambar" class="form-control col-4" id="gambar" required="file">
                     </div>
+                    
                     <div class="form-group">
                         <label class="control-label" for="harga">Harga</label>
                         <br>
-                        <input type="number" name="harga" class="form-control" id="harga" required="number">
+                        <input type="number" name="harga" class="form-control col-3" id="harga" required="number">
                     </div>
+                    
                     <button type="tambah" name="tambah" class="btn btn-success btn-block ml-3 col-md-2">tambah</button>
-                </div>
+                
             </form>
         </div>
     </div>

@@ -1,20 +1,33 @@
 <?php
 session_start();
 include '../config.php';
-$user = mysqli_query($db,"SELECT * FROM produk");
 $i = 1;
 $no = 1;
-	$produk = mysqli_query ($db, " select 
-											id,
-											nproduk,
-											deskripsi,
-											gambar,
-											harga
-									  from 
-									  produk 
-									  where id = $_GET[id]");
-	$row = mysqli_fetch_array ($produk);
-    
+$id = $_GET["id"];
+$produk = mysqli_query($db, "SELECT * from produk where id_produk = '$id'");
+$row = mysqli_fetch_assoc($produk);
+var_dump($row);
+$id = $row["id_produk"];
+$name = $row["nproduk"];
+$desk = $row["deskripsi"];
+$gambar = $row["gambar"];
+$harga = $row["harga"];
+
+if (isset($_POST["ubah"])) {
+    $id_produk = $_POST['id_produk'];
+    $nama = $_POST['nproduk'];
+    $deskripsi = $_POST['deskripsi'];
+    $harga = $_POST['harga'];
+
+    $query = "UPDATE produk SET `nproduk`='$nama',`deskripsi`='$deskripsi',`harga`='$harga' WHERE `id_produk`='$id_produk'";
+    $execute = mysqli_query($db, $query);
+    if ($execute) {
+        header('location:paket.php');
+    } else {
+        echo "<script>alert('failed')</script>";
+    }
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,36 +91,35 @@ $no = 1;
             <h3><i class="fas fa-user-alt mr-2"></i> Edit Paket</h3>
             <hr>
             <form role="form" method="post">
-                <input type="hidden" name="id" value="<?= $produk["id"];?>">
-                <input type="hidden" name="gambarlama" value="<?=$produk["gambar"];?>">
+                <input type="hidden" name="id_produk" value="<?=$id;?>">
+                <input type="hidden" name="gambarlama" value="<?=$row["gambar"];?>">
                 <div class="row">
                     <div class="form-group">
-                        <label class="control-label ml-3" for="nama">Nama Paket</label>
-                        <input type="text" name="nama" class="form-control ml-3 col-10" id="nama" required
-                            value="<?= $produk["nproduk"]; ?>">
+                        <label class="control-label ml-3" for="nproduk">Nama Paket</label>
+                        <input type="text" name="nproduk" class="form-control ml-3 col-10" id="nama"
+                            value="<?=$name;?>">
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="deskripsi">Deskripsi</label>
-                        <input type="text" name="deskripsi" class="form-control col-10" id="deskripsi"
-                            value="<?= $produk["deskripsi"]; ?>">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="gambar">Gambar</label>
-                        <input type="file" name="gambar" class="form-control col-10" id="gambar"
-                            value="<?=$produk["gambar"]; ?>">
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="harga">Harga</label>
-                        <br>
-                        <input type="number" name="harga" class="form-control" id="harga" required
-                            value="<?=$produk["harga"]; ?>">
-                    </div>
-                    <button type="ubah" name="ubah" class="btn btn-success btn-block ml-3 col-md-2">Ubah</button>
                 </div>
-            </form>
+
+                <div class="form-group">
+                    <label class="control-label" for="deskripsi">Deskripsi</label>
+                    <input type="text" name="deskripsi" id="deskripsi" class="form-control ml-1 col-10" value="<?=$desk;?>">
+                </div>
+                <img src="../bootstrap/images/<?=$gambar;?>" alt="none" width="100" heigth="100">
+                <div class="form-group">
+                    <label class="control-label" for="gambar">Gambar</label>
+                    <input type="file" name="gambar" class="form-control col-4" id="gambar"="file">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="harga">Harga</label>
+                    <br>
+                    <input type="number" name="harga" class="form-control" id="harga"
+                        value="<?=$harga;?>">
+                </div>
+                <button type="submit" name="ubah" class="btn btn-success btn-block ml-3 col-md-2">Ubah</button>
         </div>
+        </form>
+    </div>
 
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
